@@ -9,6 +9,7 @@ const searchForm = document.querySelector("[data-search-form]");
 
 // gets 10 day forecast / current weather data
 export const getForecast = async (location = "tampa") => {
+  document.querySelector(".loading-data").classList.add("display-loading");
   try {
     const url = `https://api.weatherapi.com/v1/forecast.json?key=922b671388894582ab8201238232504&q=${location}&days=3`;
     const response = fetch(url, { mode: "cors" });
@@ -21,6 +22,7 @@ export const getForecast = async (location = "tampa") => {
     const locationCurrent = locationJson.current;
     const locationForecast = locationJson.forecast;
 
+    document.querySelector(".loading-data").classList.remove("display-loading");
     createMainItem(locationInfo, locationCurrent, locationForecast);
     createDailyForecast(locationForecast);
     createSavedLocations();
