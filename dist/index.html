@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Climate Control</title>
+  <link rel="icon" href="favicon.ico"></head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-left-wrapper">
+          <img src="imgs/logo.png" alt="Climate Control Logo" class="logo" />
+          <h1>Climate Control</h1>
+        </div>
+        <form action="#" data-search-form>
+          <div class="search-box">
+            <input
+              type="text"
+              placeholder="City or ZIP Code..."
+              data-search-input
+              autocomplete="false"
+            />
+            <div class="search-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="search-results" data-search-results></div>
+          </div>
+        </form>
+      </nav>
+    </header>
+    <main>
+      <div class="main-weather-info" data-main-weather-info>
+        <div class="location-title-section"></div>
+        <div class="location-info-grid">
+          <div class="location-info"></div>
+          <div class="additional-weather-info"></div>
+        </div>
+        <div class="daily-forecast-carousel">
+          <div class="daily-forecast-header">
+            <div class="daily-forecast-header-text">Daily Forecast</div>
+            <div class="daily-forecast-btns">
+              <i id="left" class="fa-solid fa-chevron-left"></i>
+              <i id="right" class="fa-solid fa-chevron-right"></i>
+            </div>
+          </div>
+          <div class="daily-forecast-wrapper">
+            <div class="daily-forecast"></div>
+          </div>
+        </div>
+        <div class="saved-locations-container">
+          <h2 class="saved-locations-title">Saved Locations</h2>
+          <div class="saved-locations"></div>
+        </div>
+      </div>
+    </main>
+  <script defer src="bundle.js"></script></body>
+</html>

@@ -1,0 +1,824 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+// Variables Start
+$white-color: #fff;
+$off-white-color: #eee;
+$clear-day-primary: #044281;
+$clear-day-light: #2e71b3;
+$save-color: #0a800a;
+$save-border: lighten($save-color, 5%);
+$remove-color: #b21111;
+$remove-border: lighten($remove-color, 5%);
+// Variables End
+
+// Univeral Styles Start
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  color: $white-color;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient($clear-day-light, $clear-day-primary);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  appearance: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+.night-bg-linear {
+  background: linear-gradient(#02234d, #020f33);
+}
+
+.night-bg {
+  background-color: #020f33;
+}
+// Universal Styles End
+
+// Header Styles Start
+header {
+  background-color: darken($clear-day-light, 9%);
+
+  nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 530px) {
+      grid-template-columns: auto 1fr;
+    }
+
+    .nav-left-wrapper {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 30px;
+        margin-right: 10px;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+        font-weight: 600;
+
+        @media screen and (max-width: 530px) {
+          display: none;
+        }
+      }
+    }
+
+    form {
+      .search-box {
+        background-color: darken($clear-day-light, 2%);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        position: relative;
+        border-radius: 5px;
+
+        &.night-bg-light {
+          background-color: darken(#02234d, 2%);
+        }
+
+        input {
+          border: none;
+          background-color: transparent;
+          font-size: 1rem;
+          padding: 8px 0 8px 15px;
+
+          &::placeholder {
+            color: #ddd;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .search-icon {
+          background-color: transparent;
+          font-size: 1.2rem;
+          padding: 6px 15px 6px 0;
+        }
+
+        .search-results {
+          position: absolute;
+          left: 0;
+          top: 110%;
+          width: 100%;
+          background-color: #363636;
+          z-index: 10;
+          border-radius: 10px;
+
+          .empty-results {
+            padding: 10px;
+          }
+
+          .search-result {
+            padding: 10px;
+            cursor: pointer;
+
+            &:first-child {
+              border-top-right-radius: 10px;
+              border-top-left-radius: 10px;
+            }
+
+            &:last-child {
+              border-bottom-right-radius: 10px;
+              border-bottom-left-radius: 10px;
+            }
+
+            &:hover {
+              background-color: lighten(#363636, 5%);
+            }
+          }
+
+          .search-title {
+            font-size: 1rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 5px;
+          }
+
+          .search-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
+// Header Styles End
+
+// Main Styles Start
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .main-weather-info {
+    padding: 30px 5px;
+
+    @media screen and (max-width: 530px) {
+      padding: 20px 5px;
+    }
+
+    .location-title-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @media screen and (max-width: 530px) {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .location-h2-container {
+        display: flex;
+        align-items: center;
+
+        @media screen and (max-width: 530px) {
+          justify-content: space-between;
+          width: 100%;
+          margin-bottom: 10px;
+        }
+
+        h2 {
+          font-weight: 600;
+          margin-right: 15px;
+
+          @media screen and (max-width: 530px) {
+            font-size: 1.2rem;
+          }
+        }
+
+        .header-btn {
+          font-size: 0.8rem;
+
+          @media screen and (max-width: 530px) {
+            font-size: 0.9rem;
+          }
+        }
+
+        .save-location-btn {
+          border: 1px solid $save-border;
+          padding: 5px 10px;
+          background-color: $save-color;
+          border-radius: 25px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: 0.1s ease-in-out;
+
+          &:hover {
+            background-color: $save-border;
+          }
+        }
+
+        .remove-location-btn {
+          border: 1px solid $remove-border;
+          padding: 5px 10px;
+          background-color: $remove-color;
+          border-radius: 25px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: 0.1s ease-in-out;
+
+          &:hover {
+            background-color: $remove-border;
+          }
+        }
+      }
+
+      .temp-type-wrapper {
+        background-color: lighten($clear-day-light, 10%);
+        width: fit-content;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        cursor: pointer;
+        border-radius: 5px;
+
+        &.night-bg-light {
+          background-color: darken(#02234d, 10%);
+
+          .temp-type-cover {
+            background-color: #a9a9a9;
+          }
+        }
+
+        .temp-type {
+          padding: 8px 10px;
+          font-size: 1rem;
+        }
+
+        .temp-type-cover {
+          position: absolute;
+          width: 50%;
+          height: 100%;
+          background-color: #333;
+          top: 0;
+          right: 0;
+          scale: 0.9;
+          border-radius: 5px;
+
+          &.move {
+            right: initial;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    .location-info-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 5px;
+      margin: 30px 0;
+
+      @media screen and (max-width: 865px) {
+        grid-template-columns: 1fr;
+      }
+
+      @media screen and (max-width: 530px) {
+        margin: 20px 0;
+      }
+
+      .location-info {
+        padding: 30px;
+        background: linear-gradient(
+          to top right,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.1)
+        );
+        max-width: 550px;
+        border-radius: 20px;
+
+        @media screen and (max-width: 865px) {
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .info-title {
+          display: flex;
+          justify-content: space-between;
+
+          h3 {
+            font-weight: 600;
+            margin-bottom: 2px;
+          }
+
+          .info-date {
+            opacity: 0.6;
+          }
+
+          .info-description {
+            font-size: 1.1rem;
+          }
+        }
+
+        .info-weather {
+          .weather-info-container {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+
+            @media screen and (max-width: 530px) {
+              justify-content: space-between;
+            }
+
+            .info-weather-left {
+              display: flex;
+              align-items: center;
+
+              .info-icon {
+                width: 60px;
+                margin-right: 15px;
+
+                @media screen and (max-width: 530px) {
+                  width: 50px;
+                  margin-right: 10px;
+                }
+
+                img {
+                  width: 100%;
+                }
+              }
+
+              .info-temp {
+                font-size: 5rem;
+                margin-right: 30px;
+                font-weight: 500;
+
+                @media screen and (max-width: 530px) {
+                  font-size: 4rem;
+                  margin-right: 20px;
+                }
+
+                .degree {
+                  font-size: 2.5rem;
+
+                  @media screen and (max-width: 530px) {
+                    font-size: 2rem;
+                  }
+                }
+              }
+            }
+
+            .info-temp-words {
+              @media screen and (max-width: 530px) {
+                text-align: end;
+              }
+
+              .info-temp-descript {
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 6px;
+              }
+
+              .info-temp-feel {
+                font-size: 1rem;
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+
+        .hourly-forecast {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: calc((100% / 7) - 4px);
+          gap: 5px;
+          cursor: pointer;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: 0;
+
+          @media screen and (max-width: 865px) {
+            grid-auto-columns: calc((100% / 10) - 4px);
+          }
+
+          @media screen and (max-width: 775px) {
+            grid-auto-columns: calc((100% / 8) - 4px);
+          }
+
+          @media screen and (max-width: 630px) {
+            grid-auto-columns: calc((100% / 7) - 4px);
+          }
+
+          @media screen and (max-width: 530px) {
+            grid-auto-columns: calc((100% / 5) - 4px);
+          }
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          &.dragging {
+            cursor: grab;
+            scroll-behavior: auto;
+            scroll-snap-type: none;
+
+            .forecast-item {
+              user-select: none;
+            }
+          }
+
+          .forecast-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            scroll-snap-align: start;
+            pointer-events: none;
+
+            .forecast-time {
+              font-size: 0.9rem;
+            }
+            .forecast-icon {
+              width: 35px;
+
+              img {
+                width: 100%;
+              }
+            }
+            .forecast-temp {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+
+      .additional-weather-info {
+        padding: 30px;
+        background: linear-gradient(
+          to top left,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.1)
+        );
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+
+        .additional-info-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 5px;
+          height: 100%;
+          width: 100%;
+
+          @media screen and (max-width: 918px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          @media screen and (max-width: 865px) {
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: 25px;
+
+            .additional-info-item {
+              text-align: center;
+            }
+          }
+
+          .additional-info-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+
+            .additional-info-title {
+              font-size: 1rem;
+              font-weight: 500;
+              opacity: 0.6;
+              margin-bottom: 4px;
+
+              @media screen and (max-width: 530px) {
+                font-size: 0.9rem;
+              }
+            }
+            .additional-info {
+              font-size: 1.3rem;
+              font-weight: 500;
+
+              @media screen and (max-width: 530px) {
+                font-size: 1.1rem;
+              }
+
+              i {
+                transform: rotate(-45deg);
+                margin-left: 2px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .daily-forecast-carousel {
+      @media screen and (max-width: 530px) {
+        padding-top: 10px;
+      }
+
+      .daily-forecast-header {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .daily-forecast-header-text {
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
+
+        .daily-forecast-btns {
+          display: none;
+
+          @media screen and (max-width: 785px) {
+            display: block;
+          }
+
+          i {
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 5px;
+
+            @media screen and (max-width: 530px) {
+              padding: 10px 30px;
+            }
+
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.2);
+            }
+          }
+        }
+      }
+
+      .daily-forecast-wrapper {
+        .daily-forecast {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: calc((100% / 3) - 3.5px);
+          gap: 5px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: 0;
+
+          @media screen and (max-width: 785px) {
+            grid-auto-columns: calc((100% / 2) - 4px);
+            cursor: pointer;
+          }
+
+          @media screen and (max-width: 530px) {
+            grid-auto-columns: 100%;
+          }
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          &:active {
+            cursor: grab;
+          }
+
+          &.dragging {
+            cursor: grab;
+            scroll-behavior: auto;
+            scroll-snap-type: none;
+
+            .daily-forecast-item {
+              user-select: none;
+            }
+          }
+
+          .daily-forecast-item {
+            background-color: rgba(255, 255, 255, 0.04);
+            padding: 25px;
+            display: inline-block;
+            scroll-snap-align: start;
+            border-radius: 10px;
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            .daily-forecast-title {
+              opacity: 0.7;
+              font-weight: 600;
+              margin-bottom: 5px;
+              font-size: 1.1rem;
+            }
+
+            .daily-forecast-weather {
+              display: flex;
+              justify-content: space-between;
+
+              .daily-forecast-weather-left {
+                display: flex;
+
+                .daily-forecast-icon {
+                  width: 40px;
+                  margin: 20px 10px 20px 0;
+
+                  img {
+                    width: 100%;
+                  }
+                }
+
+                .daily-forecast-temps {
+                  font-size: 1.3rem;
+                  opacity: 0.7;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  padding: 8px 0;
+
+                  .high-temp {
+                    font-weight: 600;
+                  }
+                }
+              }
+
+              .daily-forecast-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-end;
+                padding: 10px 0;
+                opacity: 0.8;
+                margin-left: 5px;
+
+                .daily-forecast-text {
+                  font-size: 0.9rem;
+                  overflow-wrap: break-word;
+                  text-align: end;
+                  font-weight: 500;
+                }
+
+                .daily-forecast-info-container {
+                  display: flex;
+                  align-items: center;
+                  font-weight: 500;
+
+                  .daily-forecast-info-icon {
+                    margin-right: 10px;
+                    font-size: 0.7rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .saved-locations-container {
+      margin: 30px auto;
+
+      .saved-locations-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .saved-locations {
+        .empty-locations {
+          opacity: 0.7;
+        }
+
+        .saved-location {
+          background-color: rgba(255, 255, 255, 0.03);
+          display: flex;
+          justify-content: space-between;
+          position: relative;
+          padding: 40px 30px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          transition: 0.1s ease-in-out;
+          border-radius: 20px;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            opacity: 0.8;
+          }
+
+          .saved-left-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .saved-top-left {
+              margin-bottom: 40px;
+
+              .saved-title {
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 5px;
+                color: $off-white-color;
+
+                @media screen and (max-width: 530px) {
+                  font-size: 1.1rem;
+                  margin-right: 10px;
+                }
+              }
+
+              .saved-time {
+                font-size: 0.9rem;
+                color: $off-white-color;
+
+                @media screen and (max-width: 530px) {
+                  font-size: 0.8rem;
+                }
+              }
+            }
+
+            .saved-descript {
+              font-size: 1rem;
+              color: $off-white-color;
+
+              @media screen and (max-width: 530px) {
+                font-size: 0.9rem;
+              }
+            }
+          }
+
+          .saved-right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: end;
+
+            .saved-temp {
+              font-size: 3.2rem;
+              font-weight: 500;
+              color: $off-white-color;
+
+              @media screen and (max-width: 530px) {
+                line-height: 1;
+                font-size: 2.8rem;
+              }
+            }
+
+            .saved-high-low {
+              .saved-low {
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// Main Styles End
