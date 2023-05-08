@@ -45,7 +45,7 @@ export const createSavedLocations = () => {
     const savedTime = document.createElement("div");
     savedTime.classList.add("saved-time");
     const savedTimeText = new Date(
-      locationData.localtime.replace(/-/g, "/")
+      `${locationData.localtime}T00:00`
     ).toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",

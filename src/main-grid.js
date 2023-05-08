@@ -39,18 +39,12 @@ export const createMainItem = (
   clearElement(savedLocationsContainer);
 
   // check if its night time or day time
-  const time = new Date(locationInfo.localtime.replace(/-/g, "/"));
+  const time = new Date(`${locationInfo.localtime}T00:00`);
   const daySunrise = new Date(
-    `${locationForecast.forecastday[0].date} ${locationForecast.forecastday[0].astro.sunrise}`.replace(
-      /-/g,
-      "/"
-    )
+    `${locationForecast.forecastday[0].date} ${locationForecast.forecastday[0].astro.sunrise}T00:00`
   );
   const daySunset = new Date(
-    `${locationForecast.forecastday[0].date} ${locationForecast.forecastday[0].astro.sunset}`.replace(
-      /-/g,
-      "/"
-    )
+    `${locationForecast.forecastday[0].date} ${locationForecast.forecastday[0].astro.sunset}T00:00`
   );
 
   if (time > daySunrise && time < daySunset) {
@@ -211,7 +205,7 @@ export const createMainItem = (
   locationInfoH3.textContent = "Current weather";
   const infoDate = document.createElement("p");
   infoDate.classList.add("info-date");
-  const formattedDate = new Date(locationInfo.localtime.replace(/-/g, "/"));
+  const formattedDate = new Date(`${locationInfo.localtime}T00:00`);
   const formattedMonth = formattedDate.toLocaleString("default", {
     month: "long",
   });
@@ -219,9 +213,11 @@ export const createMainItem = (
   const infoDescription = document.createElement("div");
   infoDescription.classList.add("info-description");
   const infoP = document.createElement("p");
-  const currentInfoTime = new Date(
-    locationInfo.localtime.replace(/-/g, "/")
-  ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  const currentInfoTime = new Date(`
+    ${locationInfo.localtime}T00:00`).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   infoP.textContent =
     currentInfoTime[0] != 0
       ? currentInfoTime
@@ -333,7 +329,7 @@ export const createMainItem = (
 
   // create hourly forecast
   const currentTime = new Date(
-    locationInfo.localtime.replace(/-/g, "/")
+    `${locationInfo.localtime}T00:00`
   ).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -345,7 +341,7 @@ export const createMainItem = (
   const timeStart = trimCurrentTime.slice(0, trimCurrentTime.indexOf(":"));
   const timeOfDay = trimCurrentTime.slice(-2);
   const shortHandTime = `${timeStart}${timeOfDay} ${new Date(
-    locationInfo.localtime.replace(/-/g, "/")
+    `${locationInfo.localtime}T00:00`
   ).toLocaleDateString()}`;
 
   const neededHourlyArray = [];
@@ -353,13 +349,10 @@ export const createMainItem = (
   const secondDay = locationForecast.forecastday[1].hour;
   const hourlyArray = [...currentDay, ...secondDay];
   hourlyArray.forEach((hour) => {
-    const hourTime = new Date(hour.time.replace(/-/g, "/")).toLocaleTimeString(
-      [],
-      {
-        hour: "2-digit",
-        minute: "2-digit",
-      }
-    );
+    const hourTime = new Date(`${hour.time}T00:00`).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     const trimHourTime =
       hourTime[0] != 0 ? hourTime : hourTime.slice(1, hourTime.length);
     const hourStart = trimHourTime.slice(0, trimHourTime.indexOf(":"));
@@ -367,7 +360,7 @@ export const createMainItem = (
     const shorthandHour = `${hourStart}${partOfDay}`;
     const hourObj = {
       date: `${shorthandHour} ${new Date(
-        hour.time.replace(/-/g, "/")
+        `${hour.time}T00:00`
       ).toLocaleDateString()}`,
       time: shorthandHour,
       icon: hour.condition.icon,
