@@ -44,13 +44,12 @@ export const createSavedLocations = () => {
     savedTitle.textContent = location.title;
     const savedTime = document.createElement("div");
     savedTime.classList.add("saved-time");
-    const savedTimeText = new Date(locationData.localtime).toLocaleTimeString(
-      [],
-      {
-        hour: "2-digit",
-        minute: "2-digit",
-      }
-    );
+    const savedTimeText = new Date(
+      locationData.localtime.replace(/-/g, "/")
+    ).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     savedTime.textContent =
       savedTimeText[0] != 0
         ? savedTimeText
